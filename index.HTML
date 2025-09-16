@@ -88,6 +88,11 @@
             padding: 20px;
             text-align: center;
         }
+        .product img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
         .product h3 {
             color: #007bff;
             margin: 10px 0;
@@ -100,6 +105,32 @@
         }
         .paypal-button-container {
             margin-top: 10px;
+        }
+        .contact-form {
+            max-width: 500px;
+            margin: 40px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .contact-form input, .contact-form textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .contact-form button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .contact-form button:hover {
+            background: #0056b3;
         }
         footer {
             background: #1a1a1a;
@@ -130,6 +161,7 @@
     <section class="products">
         <div class="product">
             <h3>NeuroEdge AI</h3>
+            <img src="robot-image.jpg" alt="NeuroEdge AI Robot">
             <p>Entry-level AI-powered EA for automated trading with robust risk management.</p>
             <div class="price">$199</div>
             <div id="paypal-button-container-neuroedge-ai" class="paypal-button-container"></div>
@@ -137,6 +169,7 @@
         </div>
         <div class="product">
             <h3>NeuroEdge AI Pro</h3>
+            <img src="robot-image.jpg" alt="NeuroEdge AI Pro Robot">
             <p>Advanced EA with enhanced AI algorithms and multi-market adaptability.</p>
             <div class="price">$399</div>
             <div id="paypal-button-container-neuroedge-ai-pro" class="paypal-button-container"></div>
@@ -144,6 +177,7 @@
         </div>
         <div class="product">
             <h3>NeuroEdge AI Ultimate</h3>
+            <img src="robot-image.jpg" alt="NeuroEdge AI Ultimate Robot">
             <p>Premium EA with real-time optimization and advanced neural network features.</p>
             <div class="price">$699</div>
             <div id="paypal-button-container-neuroedge-ai-ultimate" class="paypal-button-container"></div>
@@ -151,8 +185,18 @@
         </div>
     </section>
 
+    <section class="contact-form">
+        <h3>Contact Us</h3>
+        <form action="https://formspree.io/f/your-unique-formspree-id" method="POST">
+            <input type="text" name="name" placeholder="Your Name" required>
+            <input type="email" name="email" placeholder="Your Email" required>
+            <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
+            <button type="submit">Send Message</button>
+        </form>
+    </section>
+
     <footer>
-        <p>&copy; 2025 NeuroEdge AI. All rights reserved. | <a href="mailto:neuroedgeultimate@gmail.com">Contact Us</a></p>
+        <p>&copy; 2025 NeuroEdge AI. All rights reserved. | <a href="mailto:support@yourdomain.com">Contact Us</a></p>
     </footer>
 
     <!-- Load PayPal button logic -->
