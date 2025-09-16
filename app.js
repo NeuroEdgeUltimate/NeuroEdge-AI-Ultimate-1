@@ -3,10 +3,10 @@ paypal.Buttons({
         return actions.order.create({
             purchase_units: [{
                 amount: {
-                    value: '99.00',
+                    value: '199.00',
                     currency_code: 'USD'
                 },
-                description: 'NeuroEdge AI - Entry-level AI-powered EA'
+                description: 'NeuroEdge AI - Entry-level AI-powered MT5 EA'
             }]
         });
     },
@@ -23,10 +23,10 @@ paypal.Buttons({
         return actions.order.create({
             purchase_units: [{
                 amount: {
-                    value: '199.00',
+                    value: '399.00',
                     currency_code: 'USD'
                 },
-                description: 'NeuroEdge AI Pro - Advanced AI-powered EA'
+                description: 'NeuroEdge AI Pro - Advanced AI-powered MT5 EA'
             }]
         });
     },
@@ -43,10 +43,10 @@ paypal.Buttons({
         return actions.order.create({
             purchase_units: [{
                 amount: {
-                    value: '299.00',
+                    value: '699.00',
                     currency_code: 'USD'
                 },
-                description: 'NeuroEdge AI Ultimate - Premium AI-powered EA'
+                description: 'NeuroEdge AI Ultimate - Premium AI-powered MT5 EA'
             }]
         });
     },
