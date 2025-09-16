@@ -1,9 +1,50 @@
-<!DOCTYPE html>
+<script type="text/javascript">
+        var gk_isXlsx = false;
+        var gk_xlsxFileLookup = {};
+        var gk_fileData = {};
+        function filledCell(cell) {
+          return cell !== '' && cell != null;
+        }
+        function loadFileData(filename) {
+        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
+            try {
+                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
+                var firstSheetName = workbook.SheetNames[0];
+                var worksheet = workbook.Sheets[firstSheetName];
+
+                // Convert sheet to JSON to filter blank rows
+                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
+                // Filter out blank rows (rows where all cells are empty, null, or undefined)
+                var filteredData = jsonData.filter(row => row.some(filledCell));
+
+                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
+                var headerRowIndex = filteredData.findIndex((row, index) =>
+                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
+                );
+                // Fallback
+                if (headerRowIndex === -1 || headerRowIndex > 25) {
+                  headerRowIndex = 0;
+                }
+
+                // Convert filtered JSON back to CSV
+                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
+                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
+                return csv;
+            } catch (e) {
+                console.error(e);
+                return "";
+            }
+        }
+        return gk_fileData[filename] || "";
+        }
+        </script><!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NeuroEdge AI - Advanced Trading EAs</title>
+    <!-- PayPal JS SDK -->
+    <script src="https://www.paypal.com/sdk/js?client-id=ATV9pZl6V8hHgw0Brw1qcJWpCpNLH6A40spOf7GhMcMeZfyb9MhIh0PXokLkUNUIDp8_z1sH1E_hUawO&buyer-country=US&currency=USD&components=buttons&enable-funding=venmo,paylater,card" data-sdk-integration-source="developer-studio"></script>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -57,17 +98,8 @@
             font-weight: bold;
             margin: 10px 0;
         }
-        button {
-            background: #007bff;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-        }
-        button:hover {
-            background: #0056b3;
+        .paypal-button-container {
+            margin-top: 10px;
         }
         footer {
             background: #1a1a1a;
@@ -77,6 +109,10 @@
             position: relative;
             bottom: 0;
             width: 100%;
+        }
+        a {
+            color: #007bff;
+            text-decoration: none;
         }
     </style>
 </head>
@@ -96,24 +132,30 @@
             <h3>NeuroEdge AI</h3>
             <p>Entry-level AI-powered EA for automated trading with robust risk management.</p>
             <div class="price">$99</div>
-            <button onclick="window.location.href='https://your-payment-link.com/neuroedge-ai'">Buy Now</button>
+            <div id="paypal-button-container-neuroedge-ai" class="paypal-button-container"></div>
+            <p id="result-message-neuroedge-ai"></p>
         </div>
         <div class="product">
             <h3>NeuroEdge AI Pro</h3>
             <p>Advanced EA with enhanced AI algorithms and multi-market adaptability.</p>
             <div class="price">$199</div>
-            <button onclick="window.location.href='https://your-payment-link.com/neuroedge-ai-pro'">Buy Now</button>
+            <div id="paypal-button-container-neuroedge-ai-pro" class="paypal-button-container"></div>
+            <p id="result-message-neuroedge-ai-pro"></p>
         </div>
         <div class="product">
             <h3>NeuroEdge AI Ultimate</h3>
             <p>Premium EA with real-time optimization and advanced neural network features.</p>
             <div class="price">$299</div>
-            <button onclick="window.location.href='https://your-payment-link.com/neuroedge-ai-ultimate'">Buy Now</button>
+            <div id="paypal-button-container-neuroedge-ai-ultimate" class="paypal-button-container"></div>
+            <p id="result-message-neuroedge-ai-ultimate"></p>
         </div>
     </section>
 
     <footer>
-        <p>&copy; 2025 NeuroEdge AI. All rights reserved. | <a href="mailto:support@yourdomain.com" style="color: #007bff;">Contact Us</a></p>
+        <p>&copy; 2025 NeuroEdge AI. All rights reserved. | <a href="mailto:support@yourdomain.com">Contact Us</a></p>
     </footer>
+
+    <!-- Load PayPal button logic -->
+    <script src="app.js"></script>
 </body>
 </html>
