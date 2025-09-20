@@ -187,6 +187,27 @@
                 <div id="paypal-button-container-neuroedge-ai" class="paypal-button-container"></div>
                 <p id="result-message-neuroedge-ai" class="result-message"></p>
                 <strong>Monthly Subscription: $39/month</strong><br>
+                <div id="paypal-button-container-P-82E37085BW603832BNDHM2PQ"></div>
+<script src="https://www.paypal.com/sdk/js?client-id=AZSR2KHkYGmvZOaNQX36LPEB9wZ9orOcdieFOechky5Av9QZHyR2T3nhE6QvPbO6k5pb07KJSgjanuz9&vault=true&intent=subscription" data-sdk-integration-source="button-factory"></script>
+<script>
+  paypal.Buttons({
+      style: {
+          shape: 'pill',
+          color: 'blue',
+          layout: 'vertical',
+          label: 'subscribe'
+      },
+      createSubscription: function(data, actions) {
+        return actions.subscription.create({
+          /* Creates the subscription */
+          plan_id: 'P-82E37085BW603832BNDHM2PQ'
+        });
+      },
+      onApprove: function(data, actions) {
+        alert(data.subscriptionID); // You can add optional success message for the subscriber here
+      }
+  }).render('#paypal-button-container-P-82E37085BW603832BNDHM2PQ'); // Renders the PayPal button
+</script>
                 <div id="paypal-button-container-sub-basic" class="paypal-button-container"></div>
                 <p id="result-message-sub-basic" class="result-message"></p>
             </div>
