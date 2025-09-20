@@ -4,11 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>NeuroEdge AI - Advanced Trading EAs</title>
-<script 
-  src="https://www.paypal.com/sdk/js?client-id=BAA4DZ0dG5ny0JiEnvFJvkNFLNtagjiqDqiIuYFSajLg0PHpLUu5sokKsDCQKyHCqVXVksWo9yJ5iqHEFs&components=hosted-buttons&disable-funding=venmo&currency=USD">
-</script>
+
   <!-- PayPal SDK (load once) -->
-  <script src="https://www.paypal.com/sdk/js?client-id=ARHtvtTxRrjggGtGkU7Hl0SgtRxLPdlVDlAlmxK8LcysyRDD7XjohWaMhbN3UIJJKRKkks6KoXBpJtw9&vault=true&intent=subscription&components=buttons,hosted-buttons,subscriptions&currency=USD"></script>
+  <script src="https://www.paypal.com/sdk/js?client-id=YOUR-LIVE-CLIENT-ID&vault=true&intent=subscription&components=buttons,hosted-buttons,subscriptions&currency=USD"></script>
 
   <style>
     body {
@@ -125,48 +123,34 @@
       </div>
     </div>
   </section>
+  
+  <section class="contact-form"> <h3>Contact Us</h3> <form action="https://formspree.io/f/mwpndpby" method="POST"> <input type="text" name="name" placeholder="Your Name" required> <input type="email" name="email" placeholder="Your Email" required> <textarea name="message" placeholder="Your Message" rows="5" required></textarea> <button type="submit">Send Message</button> <div id="success-message" class="success-message">Message sent successfully! We'll get back to you soon.</div> </form> </section>
+
+  <footer>
+    <p>&copy; 2025 NeuroEdge AI. All rights reserved. | <a href="mailto:neuroedgeultimate@gmail.com">Contact Us</a></p>
+  </footer>
+
   <script>
     // One-time purchase buttons
     paypal.HostedButtons({ hostedButtonId: "48TSPJZC8USMG" }).render("#paypal-basic-onetime");
-        // Subscription buttons
+    paypal.HostedButtons({ hostedButtonId: "SXMAW27YLKKWY" }).render("#paypal-pro-onetime");
+    paypal.HostedButtons({ hostedButtonId: "PT774ZA3V9PH6" }).render("#paypal-ultimate-onetime");
+
+    // Subscription buttons
     paypal.Buttons({
       createSubscription: (data, actions) => actions.subscription.create({ plan_id: "P-82E37085BW603832BNDHM2PQ" }),
       onApprove: (data) => alert("Basic Subscription ID: " + data.subscriptionID)
     }).render("#paypal-basic-sub");
-    paypal.HostedButtons({ hostedButtonId: "SXMAW27YLKKWY" }).render("#paypal-pro-onetime");
-        paypal.Buttons({
+
+    paypal.Buttons({
       createSubscription: (data, actions) => actions.subscription.create({ plan_id: "P-79407289EB482072BNDHNACA" }),
       onApprove: (data) => alert("Pro Subscription ID: " + data.subscriptionID)
     }).render("#paypal-pro-sub");
-    paypal.HostedButtons({ hostedButtonId: "PT774ZA3V9PH6" }).render("#paypal-ultimate-onetime");
-        paypal.Buttons({
+
+    paypal.Buttons({
       createSubscription: (data, actions) => actions.subscription.create({ plan_id: "P-3WX39624HB510221RNDHNBGA" }),
       onApprove: (data) => alert("Ultimate Subscription ID: " + data.subscriptionID)
     }).render("#paypal-ultimate-sub");
-  <script>
-    <section class="contact-form">
-        <h3>Contact Us</h3>
-        <form action="https://formspree.io/f/mwpndpby" method="POST">
-            <input type="text" name="name" placeholder="Your Name" required>
-            <input type="email" name="email" placeholder="Your Email" required>
-            <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
-            <button type="submit">Send Message</button>
-            <div id="success-message" class="success-message">Message sent successfully! We'll get back to you soon.</div>
-        </form>
-    </section>
-
-    <footer>
-        <p>&copy; 2025 NeuroEdge AI. All rights reserved. | <a href="mailto:neuroedgeultimate@gmail.com">Contact Us</a></p>
-    </footer>
-
-    <!-- Load PayPal button logic -->
-    <script src="app.js"></script>
-    <script>
-        document.querySelector('form').addEventListener('submit', function(e) {
-            const successMessage = document.getElementById('success-message');
-            successMessage.style.display = 'block';
-            setTimeout(() => successMessage.style.display = 'none', 5000);
-        });
-    </script>
+  </script>
 </body>
 </html>
