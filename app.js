@@ -63,7 +63,7 @@ paypal.Buttons({
 paypal.Buttons({
     createSubscription: function(data, actions) {
         return actions.subscription.create({
-            plan_id: 'PLAN_ID_HERE_BASIC'
+            plan_id: 'P-4H345618GE642320BNDHGWJA'
         });
     },
     onApprove: function(data, actions) {
@@ -74,7 +74,7 @@ paypal.Buttons({
 paypal.Buttons({
     createSubscription: function(data, actions) {
         return actions.subscription.create({
-            plan_id: 'PLAN_ID_HERE_PRO'
+            plan_id: 'P-3AB04862PL207104TNDHGUZA'
         });
     },
     onApprove: function(data, actions) {
@@ -85,7 +85,7 @@ paypal.Buttons({
 paypal.Buttons({
     createSubscription: function(data, actions) {
         return actions.subscription.create({
-            plan_id: 'PLAN_ID_HERE_ULTIMATE'
+            plan_id: 'P-6N9864857H046771GNDHE7ZY'
         });
     },
     onApprove: function(data, actions) {
