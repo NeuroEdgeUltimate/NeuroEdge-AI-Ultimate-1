@@ -28,7 +28,6 @@ paypal.Buttons({
         return actions.order.capture().then(function(details) {
             document.getElementById('result-message-neuroedge-ai').innerText = 
                 'Transaction completed by ' + (details.payer.name.given_name || 'Customer') + '!';
-            alert('Payment successful! Check your email for the EA file.');
         }).catch(function(err) {
             console.error('Capture error:', err);
             document.getElementById('result-message-neuroedge-ai').innerText = 'Payment failed. Please try again.';
@@ -56,7 +55,6 @@ paypal.Buttons({
         return actions.order.capture().then(function(details) {
             document.getElementById('result-message-neuroedge-ai-pro').innerText = 
                 'Transaction completed by ' + (details.payer.name.given_name || 'Customer') + '!';
-            alert('Payment successful! Check your email for the EA file.');
         }).catch(function(err) {
             console.error('Capture error:', err);
             document.getElementById('result-message-neuroedge-ai-pro').innerText = 'Payment failed. Please try again.';
@@ -84,7 +82,6 @@ paypal.Buttons({
         return actions.order.capture().then(function(details) {
             document.getElementById('result-message-neuroedge-ai-ultimate').innerText = 
                 'Transaction completed by ' + (details.payer.name.given_name || 'Customer') + '!';
-            alert('Payment successful! Check your email for the EA file.');
         }).catch(function(err) {
             console.error('Capture error:', err);
             document.getElementById('result-message-neuroedge-ai-ultimate').innerText = 'Payment failed. Please try again.';
@@ -101,10 +98,12 @@ paypal.Buttons({
 // NOTE: Replace each PLAN_ID with your LIVE Plan ID
 // from your PayPal Dashboard (NOT Sandbox)
 
-    paypal.Buttons({
-      createSubscription: (data, actions) => actions.subscription.create({ plan_id: "P-82E37085BW603832BNDHM2PQ" }),
-      onApprove: (data) => alert("Basic Subscription ID: " + data.subscriptionID)
-    }).render("#paypal-basic-sub");
+paypal.Buttons({
+    createSubscription: function(data, actions) {
+        return actions.subscription.create({
+            plan_id: 'P-4H345618GE642320BNDHGWJA'  // Basic $39/month
+        });
+    },
     onApprove: function(data, actions) {
         document.getElementById('result-message-sub-basic').innerText = 
             'Subscription activated for Basic plan! ID: ' + data.subscriptionID;
@@ -120,10 +119,12 @@ paypal.Buttons({
     }
 }).render('#paypal-button-container-sub-basic');
 
-    paypal.Buttons({
-      createSubscription: (data, actions) => actions.subscription.create({ plan_id: "P-79407289EB482072BNDHNACA" }),
-      onApprove: (data) => alert("Pro Subscription ID: " + data.subscriptionID)
-    }).render("#paypal-pro-sub");
+paypal.Buttons({
+    createSubscription: function(data, actions) {
+        return actions.subscription.create({
+            plan_id: 'P-3AB04862PL207104TNDHGUZA'  // Pro $79/month
+        });
+    },
     onApprove: function(data, actions) {
         document.getElementById('result-message-sub-pro').innerText = 
             'Subscription activated for Pro plan! ID: ' + data.subscriptionID;
@@ -139,10 +140,12 @@ paypal.Buttons({
     }
 }).render('#paypal-button-container-sub-pro');
 
-    paypal.Buttons({
-      createSubscription: (data, actions) => actions.subscription.create({ plan_id: "P-3WX39624HB510221RNDHNBGA" }),
-      onApprove: (data) => alert("Ultimate Subscription ID: " + data.subscriptionID)
-    }).render("#paypal-ultimate-sub");
+paypal.Buttons({
+    createSubscription: function(data, actions) {
+        return actions.subscription.create({
+            plan_id: 'P-6N9864857H046771GNDHE7ZY'  // Ultimate $129/month
+        });
+    },
     onApprove: function(data, actions) {
         document.getElementById('result-message-sub-ultimate').innerText = 
             'Subscription activated for Ultimate plan! ID: ' + data.subscriptionID;

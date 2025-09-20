@@ -1,156 +1,250 @@
-<!DOCTYPE html>
+<script type="text/javascript">
+        var gk_isXlsx = false;
+        var gk_xlsxFileLookup = {};
+        var gk_fileData = {};
+        function filledCell(cell) {
+          return cell !== '' && cell != null;
+        }
+        function loadFileData(filename) {
+        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
+            try {
+                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
+                var firstSheetName = workbook.SheetNames[0];
+                var worksheet = workbook.Sheets[firstSheetName];
+
+                // Convert sheet to JSON to filter blank rows
+                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
+                // Filter out blank rows (rows where all cells are empty, null, or undefined)
+                var filteredData = jsonData.filter(row => row.some(filledCell));
+
+                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
+                var headerRowIndex = filteredData.findIndex((row, index) =>
+                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
+                );
+                // Fallback
+                if (headerRowIndex === -1 || headerRowIndex > 25) {
+                  headerRowIndex = 0;
+                }
+
+                // Convert filtered JSON back to CSV
+                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
+                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
+                return csv;
+            } catch (e) {
+                console.error(e);
+                return "";
+            }
+        }
+        return gk_fileData[filename] || "";
+        }
+        </script><!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>NeuroEdge AI - Advanced Trading EAs</title>
-
-  <!-- PayPal SDK (load once) -->
-  <script src="https://www.paypal.com/sdk/js?client-id=YOUR-LIVE-CLIENT-ID&vault=true&intent=subscription&components=buttons,hosted-buttons,subscriptions&currency=USD"></script>
-
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      background: #f4f4f4;
-      color: #333;
-    }
-    header {
-      background: #1a1a1a;
-      color: white;
-      padding: 20px;
-      text-align: center;
-    }
-    .hero {
-      background: #0a0a0a;
-      color: white;
-      padding: 60px 20px;
-      text-align: center;
-    }
-    .hero h2 {
-      margin: 0;
-      font-size: 36px;
-    }
-    .products {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      padding: 40px 20px;
-      gap: 30px;
-    }
-    .product {
-      background: white;
-      border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-      width: 300px;
-      padding: 20px;
-      text-align: center;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-    .product h3 {
-      color: #007bff;
-      margin: 10px 0;
-    }
-    .price {
-      font-size: 24px;
-      color: #28a745;
-      font-weight: bold;
-      margin: 10px 0;
-    }
-    .button-section {
-      margin: 15px 0;
-    }
-    .paypal-button-container {
-      margin: 10px 0;
-    }
-    footer {
-      background: #1a1a1a;
-      color: white;
-      text-align: center;
-      padding: 10px;
-      width: 100%;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NeuroEdge AI - Advanced Trading EAs</title>
+                <script 
+  src="https://www.paypal.com/sdk/js?client-id=BAA4DZ0dG5ny0JiEnvFJvkNFLNtagjiqDqiIuYFSajLg0PHpLUu5sokKsDCQKyHCqVXVksWo9yJ5iqHEFs&components=hosted-buttons&disable-funding=venmo&currency=USD">
+</script>
+    <!-- PayPal JS SDK - Replace with your client ID (sandbox for testing) -->
+    <script src="https://www.paypal.com/sdk/js?client-id=AZSR2KHkYGmvZOaNQX36LPEB9wZ9orOcdieFOechky5Av9QZHyR2T3nhE6QvPbO6k5pb07KJSgjanuz9&vault=true&intent=subscription&components=buttons,subscriptions&currency=USD&enable-funding=venmo,paylater,card" data-sdk-integration-source="developer-studio"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f4f4f4;
+            color: #333;
+        }
+        header {
+            background: #1a1a1a;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        .hero {
+            background: #0a0a0a;
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+        }
+        .hero h2 {
+            margin: 0;
+            font-size: 36px;
+        }
+        .hero p {
+            font-size: 18px;
+            margin: 10px 0;
+        }
+        .products {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 40px 20px;
+            gap: 30px;
+        }
+        .product {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            width: 300px;
+            padding: 20px;
+            text-align: center;
+        }
+        .product img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+        .product h3 {
+            color: #007bff;
+            margin: 10px 0;
+        }
+        .price {
+            font-size: 24px;
+            color: #28a745;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+        .button-section {
+            margin: 10px 0;
+        }
+        .paypal-button-container {
+            margin: 5px 0;
+        }
+        .result-message {
+            font-size: 14px;
+            margin: 5px 0;
+            color: #28a745;
+        }
+        .contact-form {
+            max-width: 500px;
+            margin: 40px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .contact-form input, .contact-form textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .contact-form button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .contact-form button:hover {
+            background: #0056b3;
+        }
+        .success-message {
+            color: #28a745;
+            margin-top: 10px;
+            display: none;
+        }
+        footer {
+            background: #1a1a1a;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            width: 100%;
+        }
+        a {
+            color: #007bff;
+            text-decoration: none;
+        }
+    </style>
 </head>
 <body>
-  <header>
-    <h1>NeuroEdge AI Trading Marketplace</h1>
-    <p>Advanced AI-powered MetaTrader EAs for smarter trading</p>
-  </header>
+    <header>
+        <h1>NeuroEdge AI Trading Marketplace</h1>
+        <p>Advanced AI-powered MetaTrader EAs for smarter trading</p>
+    </header>
 
-  <section class="hero">
-    <h2>Unlock Profitable Trading with NeuroEdge AI</h2>
-    <p>Choose from our cutting-edge Expert Advisors designed for MetaTrader to elevate your trading strategy.</p>
-  </section>
+    <section class="hero">
+        <h2>Unlock Profitable Trading with NeuroEdge AI</h2>
+        <p>Choose from our cutting-edge Expert Advisors designed for MetaTrader to elevate your trading strategy.</p>
+    </section>
 
-  <section class="products">
-    <!-- Product 1 -->
-    <div class="product">
-      <h3>MetaTrader 5 EA - Basic</h3>
-      <div class="price">$199 one-time or $39/month</div>
-      <div class="button-section">
-        <strong>One-Time Purchase</strong>
-        <div id="paypal-basic-onetime"></div>
-        <strong>Monthly Subscription</strong>
-        <div id="paypal-basic-sub"></div>
-      </div>
-    </div>
+    <section class="products">
+        <div class="product">
+            <h3>MetaTrader 5 Expert Advisor Program</h3>
+               <div class="button-section">
+            <div id="paypal-container-48TSPJZC8USMG"></div>
+<script>
+  paypal.HostedButtons({
+    hostedButtonId: "48TSPJZC8USMG",
+  }).render("#paypal-container-48TSPJZC8USMG")
+</script>
+                <strong>One-Time Purchase:</strong><br>
+                            <div class="price">$199</div>
+                <div id="paypal-button-container-neuroedge-ai" class="paypal-button-container"></div>
+                <p id="result-message-neuroedge-ai" class="result-message"></p>
+                <strong>Or</strong><br>
+                <strong>Monthly Subscription: $39/month</strong><br>
+                <div id="paypal-button-container-sub-basic" class="paypal-button-container"></div>
+                <p id="result-message-sub-basic" class="result-message"></p>
+            </div>
+        </div>
+        <div class="product">
+            <h3>NeuroEdge AI Pro</h3>
+            <img src="robot-image-2.jpg" alt="NeuroEdge AI Pro">
+            <p>Advanced EA with enhanced AI algorithms and multi-market adaptability.</p>
+            <div class="price">$399 (One-time) or $79/month</div>
+            <div class="button-section">
+                <strong>One-Time Purchase:</strong><br>
+                <div id="paypal-button-container-neuroedge-ai-pro" class="paypal-button-container"></div>
+                <p id="result-message-neuroedge-ai-pro" class="result-message"></p>
+                <strong>Monthly Subscription:</strong><br>
+                <div id="paypal-button-container-sub-pro" class="paypal-button-container"></div>
+                <p id="result-message-sub-pro" class="result-message"></p>
+            </div>
+        </div>
+        <div class="product">
+            <h3>NeuroEdge AI Ultimate</h3>
+            <img src="robot-image-3.jpg" alt="NeuroEdge AI Ultimate">
+            <p>Premium EA with real-time optimization and advanced neural network features.</p>
+            <div class="price">$699 (One-time) or $129/month</div>
+            <div class="button-section">
+                <strong>One-Time Purchase:</strong><br>
+                <div id="paypal-button-container-neuroedge-ai-ultimate" class="paypal-button-container"></div>
+                <p id="result-message-neuroedge-ai-ultimate" class="result-message"></p>
+                <strong>Monthly Subscription:</strong><br>
+                <div id="paypal-button-container-sub-ultimate" class="paypal-button-container"></div>
+                <p id="result-message-sub-ultimate" class="result-message"></p>
+            </div>
+        </div>
+    </section>
 
-    <!-- Product 2 -->
-    <div class="product">
-      <h3>MetaTrader 5 EA - Pro</h3>
-      <div class="price">$399 one-time or $79/month</div>
-      <div class="button-section">
-        <strong>One-Time Purchase</strong>
-        <div id="paypal-pro-onetime"></div>
-        <strong>Monthly Subscription</strong>
-        <div id="paypal-pro-sub"></div>
-      </div>
-    </div>
+    <section class="contact-form">
+        <h3>Contact Us</h3>
+        <form action="https://formspree.io/f/mwpndpby" method="POST">
+            <input type="text" name="name" placeholder="Your Name" required>
+            <input type="email" name="email" placeholder="Your Email" required>
+            <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
+            <button type="submit">Send Message</button>
+            <div id="success-message" class="success-message">Message sent successfully! We'll get back to you soon.</div>
+        </form>
+    </section>
 
-    <!-- Product 3 -->
-    <div class="product">
-      <h3>MetaTrader 5 EA - Ultimate</h3>
-      <div class="price">$699 one-time or $129/month</div>
-      <div class="button-section">
-        <strong>One-Time Purchase</strong>
-        <div id="paypal-ultimate-onetime"></div>
-        <strong>Monthly Subscription</strong>
-        <div id="paypal-ultimate-sub"></div>
-      </div>
-    </div>
-  </section>
-  
-  <section class="contact-form"> <h3>Contact Us</h3> <form action="https://formspree.io/f/mwpndpby" method="POST"> <input type="text" name="name" placeholder="Your Name" required> <input type="email" name="email" placeholder="Your Email" required> <textarea name="message" placeholder="Your Message" rows="5" required></textarea> <button type="submit">Send Message</button> <div id="success-message" class="success-message">Message sent successfully! We'll get back to you soon.</div> </form> </section>
+    <footer>
+        <p>&copy; 2025 NeuroEdge AI. All rights reserved. | <a href="mailto:neuroedgeultimate@gmail.com">Contact Us</a></p>
+    </footer>
 
-  <footer>
-    <p>&copy; 2025 NeuroEdge AI. All rights reserved. | <a href="mailto:neuroedgeultimate@gmail.com">Contact Us</a></p>
-  </footer>
-
-  <script>
-    // One-time purchase buttons
-    paypal.HostedButtons({ hostedButtonId: "48TSPJZC8USMG" }).render("#paypal-basic-onetime");
-    paypal.HostedButtons({ hostedButtonId: "SXMAW27YLKKWY" }).render("#paypal-pro-onetime");
-    paypal.HostedButtons({ hostedButtonId: "PT774ZA3V9PH6" }).render("#paypal-ultimate-onetime");
-
-    // Subscription buttons
-    paypal.Buttons({
-      createSubscription: (data, actions) => actions.subscription.create({ plan_id: "P-82E37085BW603832BNDHM2PQ" }),
-      onApprove: (data) => alert("Basic Subscription ID: " + data.subscriptionID)
-    }).render("#paypal-basic-sub");
-
-    paypal.Buttons({
-      createSubscription: (data, actions) => actions.subscription.create({ plan_id: "P-79407289EB482072BNDHNACA" }),
-      onApprove: (data) => alert("Pro Subscription ID: " + data.subscriptionID)
-    }).render("#paypal-pro-sub");
-
-    paypal.Buttons({
-      createSubscription: (data, actions) => actions.subscription.create({ plan_id: "P-3WX39624HB510221RNDHNBGA" }),
-      onApprove: (data) => alert("Ultimate Subscription ID: " + data.subscriptionID)
-    }).render("#paypal-ultimate-sub");
-  </script>
+    <!-- Load PayPal button logic -->
+    <script src="app.js"></script>
+    <script>
+        document.querySelector('form').addEventListener('submit', function(e) {
+            const successMessage = document.getElementById('success-message');
+            successMessage.style.display = 'block';
+            setTimeout(() => successMessage.style.display = 'none', 5000);
+        });
+    </script>
 </body>
 </html>
