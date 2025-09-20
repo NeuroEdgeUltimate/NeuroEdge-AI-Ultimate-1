@@ -1,3 +1,4 @@
+// One-time purchases
 paypal.Buttons({
     createOrder: function(data, actions) {
         return actions.order.create({
@@ -57,3 +58,37 @@ paypal.Buttons({
         });
     }
 }).render('#paypal-button-container-neuroedge-ai-ultimate');
+
+// Subscriptions
+paypal.Buttons({
+    createSubscription: function(data, actions) {
+        return actions.subscription.create({
+            plan_id: 'PLAN_ID_HERE_BASIC'
+        });
+    },
+    onApprove: function(data, actions) {
+        document.getElementById('result-message-sub-basic').innerText = 'Subscription activated for Basic plan!';
+    }
+}).render('#paypal-button-container-sub-basic');
+
+paypal.Buttons({
+    createSubscription: function(data, actions) {
+        return actions.subscription.create({
+            plan_id: 'PLAN_ID_HERE_PRO'
+        });
+    },
+    onApprove: function(data, actions) {
+        document.getElementById('result-message-sub-pro').innerText = 'Subscription activated for Pro plan!';
+    }
+}).render('#paypal-button-container-sub-pro');
+
+paypal.Buttons({
+    createSubscription: function(data, actions) {
+        return actions.subscription.create({
+            plan_id: 'PLAN_ID_HERE_ULTIMATE'
+        });
+    },
+    onApprove: function(data, actions) {
+        document.getElementById('result-message-sub-ultimate').innerText = 'Subscription activated for Ultimate plan!';
+    }
+}).render('#paypal-button-container-sub-ultimate');

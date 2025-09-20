@@ -43,8 +43,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NeuroEdge AI - Advanced Trading EAs</title>
-    <!-- PayPal JS SDK - Replace SB_CLIENT_ID_HERE with your sandbox client ID -->
-    <script src="https://www.paypal.com/sdk/js?client-id=ATV9pZl6V8hHgw0Brw1qcJWpCpNLH6A40spOf7GhMcMeZfyb9MhIh0PXokLkUNUIDp8_z1sH1E_hUawO&buyer-country=US&currency=USD&components=buttons&enable-funding=venmo,paylater,card" data-sdk-integration-source="developer-studio"></script>
+    <!-- PayPal JS SDK - Replace with your sandbox client ID -->
+    <script src="https://www.paypal.com/sdk/js?client-id=ATV9pZl6V8hHgw0Brw1qcJWpCpNLH6A40spOf7GhMcMeZfyb9MhIh0PXokLkUNUIDp8_z1sH1E_hUawO&buyer-country=US&currency=USD&components=buttons,subscription&enable-funding=venmo,paylater,card" data-sdk-integration-source="developer-studio"></script>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -137,6 +137,15 @@
             margin-top: 10px;
             display: none;
         }
+        .copy-trading {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            text-align: center;
+        }
         footer {
             background: #1a1a1a;
             color: white;
@@ -168,26 +177,37 @@
             <h3>NeuroEdge AI</h3>
             <img src="robot-image.jpg" alt="NeuroEdge AI Robot">
             <p>Entry-level AI-powered EA for automated trading with robust risk management.</p>
-            <div class="price">$199</div>
+            <div class="price">$199 (One-time) or $39/month</div>
             <div id="paypal-button-container-neuroedge-ai" class="paypal-button-container"></div>
             <p id="result-message-neuroedge-ai"></p>
+            <div id="paypal-button-container-sub-basic" class="paypal-button-container"></div>
+            <p id="result-message-sub-basic"></p>
         </div>
         <div class="product">
             <h3>NeuroEdge AI Pro</h3>
             <img src="robot-image.jpg" alt="NeuroEdge AI Pro Robot">
             <p>Advanced EA with enhanced AI algorithms and multi-market adaptability.</p>
-            <div class="price">$399</div>
+            <div class="price">$399 (One-time) or $79/month</div>
             <div id="paypal-button-container-neuroedge-ai-pro" class="paypal-button-container"></div>
             <p id="result-message-neuroedge-ai-pro"></p>
+            <div id="paypal-button-container-sub-pro" class="paypal-button-container"></div>
+            <p id="result-message-sub-pro"></p>
         </div>
         <div class="product">
             <h3>NeuroEdge AI Ultimate</h3>
             <img src="robot-image.jpg" alt="NeuroEdge AI Ultimate Robot">
             <p>Premium EA with real-time optimization and advanced neural network features.</p>
-            <div class="price">$699</div>
+            <div class="price">$699 (One-time) or $129/month</div>
             <div id="paypal-button-container-neuroedge-ai-ultimate" class="paypal-button-container"></div>
             <p id="result-message-neuroedge-ai-ultimate"></p>
+            <div id="paypal-button-container-sub-ultimate" class="paypal-button-container"></div>
+            <p id="result-message-sub-ultimate"></p>
         </div>
+    </section>
+
+    <section class="copy-trading">
+        <h3>Copy Trading</h3>
+        <p>Follow top-performing traders and replicate their strategies automatically. Available in Pro ($19/month add-on) and Ultimate (up to 5 traders) tiers.</p>
     </section>
 
     <section class="contact-form">
@@ -214,5 +234,6 @@
             setTimeout(() => successMessage.style.display = 'none', 5000); // Hide after 5 seconds
         });
     </script>
+    import { Analytics } from "@vercel/analytics/next"
 </body>
 </html>
