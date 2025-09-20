@@ -101,13 +101,19 @@ paypal.Buttons({
 paypal.Buttons({
     createSubscription: function(data, actions) {
         return actions.subscription.create({
-            plan_id: 'P-4H345618GE642320BNDHGWJA'  // Basic $39/month
+            plan_id: 'P-4H345618GE642320BNDHGWJA'  // Basic $39/month - Replace with LIVE ID
         });
     },
     onApprove: function(data, actions) {
-        document.getElementById('result-message-sub-basic').innerText = 
-            'Subscription activated for Basic plan! ID: ' + data.subscriptionID;
-        console.log('Subscription approved:', data);
+        return actions.subscription.capture().then(function(details) {
+            document.getElementById('result-message-sub-basic').innerText = 
+                'Subscription activated for Basic plan! ID: ' + data.subscriptionID;
+            console.log('Subscription approved:', details);
+            alert('Subscription activated! Check your email for the EA file.');
+        }).catch(function(err) {
+            console.error('Subscription capture error (Basic):', err);
+            document.getElementById('result-message-sub-basic').innerText = 'Subscription failed. Please try again.';
+        });
     },
     onError: function(err) {
         console.error('PayPal subscription error (Basic):', err);
@@ -122,13 +128,19 @@ paypal.Buttons({
 paypal.Buttons({
     createSubscription: function(data, actions) {
         return actions.subscription.create({
-            plan_id: 'P-3AB04862PL207104TNDHGUZA'  // Pro $79/month
+            plan_id: 'P-3AB04862PL207104TNDHGUZA'  // Pro $79/month - Replace with LIVE ID
         });
     },
     onApprove: function(data, actions) {
-        document.getElementById('result-message-sub-pro').innerText = 
-            'Subscription activated for Pro plan! ID: ' + data.subscriptionID;
-        console.log('Subscription approved:', data);
+        return actions.subscription.capture().then(function(details) {
+            document.getElementById('result-message-sub-pro').innerText = 
+                'Subscription activated for Pro plan! ID: ' + data.subscriptionID;
+            console.log('Subscription approved:', details);
+            alert('Subscription activated! Check your email for the EA file.');
+        }).catch(function(err) {
+            console.error('Subscription capture error (Pro):', err);
+            document.getElementById('result-message-sub-pro').innerText = 'Subscription failed. Please try again.';
+        });
     },
     onError: function(err) {
         console.error('PayPal subscription error (Pro):', err);
@@ -143,13 +155,19 @@ paypal.Buttons({
 paypal.Buttons({
     createSubscription: function(data, actions) {
         return actions.subscription.create({
-            plan_id: 'P-6N9864857H046771GNDHE7ZY'  // Ultimate $129/month
+            plan_id: 'P-6N9864857H046771GNDHE7ZY'  // Ultimate $129/month - Replace with LIVE ID
         });
     },
     onApprove: function(data, actions) {
-        document.getElementById('result-message-sub-ultimate').innerText = 
-            'Subscription activated for Ultimate plan! ID: ' + data.subscriptionID;
-        console.log('Subscription approved:', data);
+        return actions.subscription.capture().then(function(details) {
+            document.getElementById('result-message-sub-ultimate').innerText = 
+                'Subscription activated for Ultimate plan! ID: ' + data.subscriptionID;
+            console.log('Subscription approved:', details);
+            alert('Subscription activated! Check your email for the EA file.');
+        }).catch(function(err) {
+            console.error('Subscription capture error (Ultimate):', err);
+            document.getElementById('result-message-sub-ultimate').innerText = 'Subscription failed. Please try again.';
+        });
     },
     onError: function(err) {
         console.error('PayPal subscription error (Ultimate):', err);
