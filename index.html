@@ -43,11 +43,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>NeuroEdge AI - Advanced Trading EAs</title>
-<script 
-  src="https://www.paypal.com/sdk/js?client-id=BAA4DZ0dG5ny0JiEnvFJvkNFLNtagjiqDqiIuYFSajLg0PHpLUu5sokKsDCQKyHCqVXVksWo9yJ5iqHEFs&components=hosted-buttons&disable-funding=venmo&currency=USD">
-</script>
+
   <!-- PayPal SDK (load once) -->
-  <script src="https://www.paypal.com/sdk/js?client-id=ARHtvtTxRrjggGtGkU7Hl0SgtRxLPdlVDlAlmxK8LcysyRDD7XjohWaMhbN3UIJJKRKkks6KoXBpJtw9&vault=true&intent=subscription&components=buttons,hosted-buttons,subscriptions&currency=USD"></script>
+  <script src="https://www.paypal.com/sdk/js?client-id=YOUR-LIVE-CLIENT-ID&vault=true&intent=subscription&components=buttons,hosted-buttons,subscriptions&currency=USD"></script>
 
   <style>
     body {
@@ -75,10 +73,111 @@
     }
     .products {
       display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      padding: 40px 20px;
+      gap: 30px;
+    }
+    .product {
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      width: 300px;
+      padding: 20px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .product h3 {
+      color: #007bff;
+      margin: 10px 0;
+    }
+    .price {
+      font-size: 24px;
+      color: #28a745;
+      font-weight: bold;
+      margin: 10px 0;
+    }
+    .button-section {
+      margin: 15px 0;
+    }
+    .paypal-button-container {
+      margin: 10px 0;
+    }
+    footer {
+      background: #1a1a1a;
+      color: white;
+      text-align: center;
+      padding: 10px;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>NeuroEdge AI Trading Marketplace</h1>
+    <p>Advanced AI-powered MetaTrader EAs for smarter trading</p>
+  </header>
 
-  <footer>
-    <p>&copy; 2025 NeuroEdge AI. All rights reserved. | <a href="mailto:neuroedgeultimate@gmail.com">Contact Us</a></p>
-  </footer>
+  <section class="hero">
+    <h2>Unlock Profitable Trading with NeuroEdge AI</h2>
+    <p>Choose from our cutting-edge Expert Advisors designed for MetaTrader to elevate your trading strategy.</p>
+  </section>
+
+  <section class="products">
+    <!-- Product 1 -->
+    <div class="product">
+      <h3>MetaTrader 5 EA - Basic</h3>
+      <div class="price">$199 one-time or $39/month</div>
+      <div class="button-section">
+        <strong>One-Time Purchase</strong>
+        <div id="paypal-basic-onetime"></div>
+        <strong>Monthly Subscription</strong>
+        <div id="paypal-basic-sub"></div>
+      </div>
+    </div>
+
+    <!-- Product 2 -->
+    <div class="product">
+      <h3>MetaTrader 5 EA - Pro</h3>
+      <div class="price">$399 one-time or $79/month</div>
+      <div class="button-section">
+        <strong>One-Time Purchase</strong>
+        <div id="paypal-pro-onetime"></div>
+        <strong>Monthly Subscription</strong>
+        <div id="paypal-pro-sub"></div>
+      </div>
+    </div>
+
+    <!-- Product 3 -->
+    <div class="product">
+      <h3>MetaTrader 5 EA - Ultimate</h3>
+      <div class="price">$699 one-time or $129/month</div>
+      <div class="button-section">
+        <strong>One-Time Purchase</strong>
+        <div id="paypal-ultimate-onetime"></div>
+        <strong>Monthly Subscription</strong>
+        <div id="paypal-ultimate-sub"></div>
+      </div>
+    </div>
+  </section>
+  
+    <section class="contact-form">
+        <h3>Contact Us</h3>
+        <form action="https://formspree.io/f/mwpndpby" method="POST">
+            <input type="text" name="name" placeholder="Your Name" required>
+            <input type="email" name="email" placeholder="Your Email" required>
+            <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
+            <button type="submit">Send Message</button>
+            <div id="success-message" class="success-message">Message sent successfully! We'll get back to you soon.</div>
+        </form>
+    </section>
+
+
+    <footer>
+        <p>&copy; 2025 NeuroEdge AI. All rights reserved. | <a href="mailto:neuroedgeultimate@gmail.com">Contact Us</a></p>
+    </footer>
 
   <script>
     // One-time purchase buttons
@@ -102,20 +201,9 @@
       onApprove: (data) => alert("Ultimate Subscription ID: " + data.subscriptionID)
     }).render("#paypal-ultimate-sub");
   </script>
-    <section class="contact-form">
-        <h3>Contact Us</h3>
-        <form action="https://formspree.io/f/mwpndpby" method="POST">
-            <input type="text" name="name" placeholder="Your Name" required>
-            <input type="email" name="email" placeholder="Your Email" required>
-            <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
-            <button type="submit">Send Message</button>
-            <div id="success-message" class="success-message">Message sent successfully! We'll get back to you soon.</div>
-        </form>
-    </section>
+</body>
+</html>
 
-    <footer>
-        <p>&copy; 2025 NeuroEdge AI. All rights reserved. | <a href="mailto:neuroedgeultimate@gmail.com">Contact Us</a></p>
-    </footer>
 
     <!-- Load PayPal button logic -->
     <script src="app.js"></script>
