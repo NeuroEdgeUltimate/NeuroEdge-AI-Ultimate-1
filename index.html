@@ -43,6 +43,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NeuroEdge AI - Advanced Trading EAs</title>
+                <script 
+  src="https://www.paypal.com/sdk/js?client-id=BAA4DZ0dG5ny0JiEnvFJvkNFLNtagjiqDqiIuYFSajLg0PHpLUu5sokKsDCQKyHCqVXVksWo9yJ5iqHEFs&components=hosted-buttons&disable-funding=venmo&currency=USD">
+</script>
     <!-- PayPal JS SDK - Replace with your client ID (sandbox for testing) -->
     <script src="https://www.paypal.com/sdk/js?client-id=AZSR2KHkYGmvZOaNQX36LPEB9wZ9orOcdieFOechky5Av9QZHyR2T3nhE6QvPbO6k5pb07KJSgjanuz9&vault=true&intent=subscription&components=buttons,subscriptions&currency=USD&enable-funding=venmo,paylater,card" data-sdk-integration-source="developer-studio"></script>
     <style>
@@ -176,8 +179,11 @@
             <p>Entry-level AI-powered EA for automated trading with robust risk management.</p>
             <div class="price">$199 (One-time) or $39/month</div>
             <div class="button-section">
-            <script 
-  src="https://www.paypal.com/sdk/js?client-id=BAA4DZ0dG5ny0JiEnvFJvkNFLNtagjiqDqiIuYFSajLg0PHpLUu5sokKsDCQKyHCqVXVksWo9yJ5iqHEFs&components=hosted-buttons&disable-funding=venmo&currency=USD">
+            <div id="paypal-container-48TSPJZC8USMG"></div>
+<script>
+  paypal.HostedButtons({
+    hostedButtonId: "48TSPJZC8USMG",
+  }).render("#paypal-container-48TSPJZC8USMG")
 </script>
                 <strong>One-Time Purchase:</strong><br>
                 <div id="paypal-button-container-neuroedge-ai" class="paypal-button-container"></div>
