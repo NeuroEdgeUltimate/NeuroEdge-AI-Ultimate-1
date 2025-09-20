@@ -152,5 +152,29 @@
       onApprove: (data) => alert("Ultimate Subscription ID: " + data.subscriptionID)
     }).render("#paypal-ultimate-sub");
   </script>
+    <section class="contact-form">
+        <h3>Contact Us</h3>
+        <form action="https://formspree.io/f/mwpndpby" method="POST">
+            <input type="text" name="name" placeholder="Your Name" required>
+            <input type="email" name="email" placeholder="Your Email" required>
+            <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
+            <button type="submit">Send Message</button>
+            <div id="success-message" class="success-message">Message sent successfully! We'll get back to you soon.</div>
+        </form>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 NeuroEdge AI. All rights reserved. | <a href="mailto:neuroedgeultimate@gmail.com">Contact Us</a></p>
+    </footer>
+
+    <!-- Load PayPal button logic -->
+    <script src="app.js"></script>
+    <script>
+        document.querySelector('form').addEventListener('submit', function(e) {
+            const successMessage = document.getElementById('success-message');
+            successMessage.style.display = 'block';
+            setTimeout(() => successMessage.style.display = 'none', 5000);
+        });
+    </script>
 </body>
 </html>
