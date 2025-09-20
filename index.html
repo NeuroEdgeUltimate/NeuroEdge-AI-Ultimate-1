@@ -176,10 +176,6 @@
         <div id="paypal-basic-onetime" class="paypal-button-container"></div>
         <strong>Monthly Subscription</strong>
         <div id="paypal-basic-sub" class="paypal-button-container"></div>
-            paypal.Buttons({
-      createSubscription: (data, actions) => actions.subscription.create({ plan_id: "P-82E37085BW603832BNDHM2PQ" }),
-      onApprove: (data) => alert("Basic Subscription ID: " + data.subscriptionID)
-    }).render("#paypal-basic-sub");
       </div>
     </div>
 
@@ -226,21 +222,17 @@
   <script>
     // One-time purchase buttons (using Hosted Buttons)
     paypal.HostedButtons({ hostedButtonId: "48TSPJZC8USMG" }).render("#paypal-basic-onetime");
-    paypal.HostedButtons({ hostedButtonId: "SXMAW27YLKKWY" }).render("#paypal-pro-onetime");
-    paypal.HostedButtons({ hostedButtonId: "PT774ZA3V9PH6" }).render("#paypal-ultimate-onetime");
-
-    // Subscription buttons
-    paypal.Buttons({
+        paypal.Buttons({
       createSubscription: (data, actions) => actions.subscription.create({ plan_id: "P-82E37085BW603832BNDHM2PQ" }),
       onApprove: (data) => alert("Basic Subscription ID: " + data.subscriptionID)
     }).render("#paypal-basic-sub");
-
-    paypal.Buttons({
+    paypal.HostedButtons({ hostedButtonId: "SXMAW27YLKKWY" }).render("#paypal-pro-onetime");
+        paypal.Buttons({
       createSubscription: (data, actions) => actions.subscription.create({ plan_id: "P-79407289EB482072BNDHNACA" }),
       onApprove: (data) => alert("Pro Subscription ID: " + data.subscriptionID)
     }).render("#paypal-pro-sub");
-
-    paypal.Buttons({
+    paypal.HostedButtons({ hostedButtonId: "PT774ZA3V9PH6" }).render("#paypal-ultimate-onetime");
+        paypal.Buttons({
       createSubscription: (data, actions) => actions.subscription.create({ plan_id: "P-3WX39624HB510221RNDHNBGA" }),
       onApprove: (data) => alert("Ultimate Subscription ID: " + data.subscriptionID)
     }).render("#paypal-ultimate-sub");
