@@ -162,24 +162,7 @@
       </div>
     </div>
   </section>
-  
-    <section class="contact-form">
-        <h3>Contact Us</h3>
-        <form action="https://formspree.io/f/mwpndpby" method="POST">
-            <input type="text" name="name" placeholder="Your Name" required>
-            <input type="email" name="email" placeholder="Your Email" required>
-            <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
-            <button type="submit">Send Message</button>
-            <div id="success-message" class="success-message">Message sent successfully! We'll get back to you soon.</div>
-        </form>
-    </section>
-
-
-    <footer>
-        <p>&copy; 2025 NeuroEdge AI. All rights reserved. | <a href="mailto:neuroedgeultimate@gmail.com">Contact Us</a></p>
-    </footer>
-
-  <script>
+    <script>
     // One-time purchase buttons
     paypal.HostedButtons({ hostedButtonId: "48TSPJZC8USMG" }).render("#paypal-basic-onetime");
     paypal.HostedButtons({ hostedButtonId: "SXMAW27YLKKWY" }).render("#paypal-pro-onetime");
@@ -210,5 +193,22 @@
             setTimeout(() => successMessage.style.display = 'none', 5000);
         });
     </script>
+  
+    <section class="contact-form">
+        <h3>Contact Us</h3>
+        <form action="https://formspree.io/f/mwpndpby" method="POST">
+            <input type="text" name="name" placeholder="Your Name" required>
+            <input type="email" name="email" placeholder="Your Email" required>
+            <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
+            <button type="submit">Send Message</button>
+            <div id="success-message" class="success-message">Message sent successfully! We'll get back to you soon.</div>
+        </form>
+    </section>
+
+
+    <footer>
+        <p>&copy; 2025 NeuroEdge AI. All rights reserved. | <a href="mailto:neuroedgeultimate@gmail.com">Contact Us</a></p>
+    </footer>
+
 </body>
 </html>
