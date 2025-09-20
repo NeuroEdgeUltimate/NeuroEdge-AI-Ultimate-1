@@ -1,4 +1,17 @@
-// One-time purchases (no changes needed, but added error handling)
+/***************************************************
+ * PayPal Integration - NeuroEdge AI Marketplace
+ * -------------------------------------------------
+ * IMPORTANT:
+ * 1. Replace `YOUR-LIVE-CLIENT-ID` in index.html
+ *    with your PayPal LIVE client ID from:
+ *    https://developer.paypal.com/dashboard/applications
+ *
+ * 2. Replace PLAN_ID placeholders below with your
+ *    LIVE plan IDs from:
+ *    PayPal Dashboard → Pay & Get Paid → Subscriptions → Plans
+ ***************************************************/
+
+// ------------------- One-time Purchases -------------------
 paypal.Buttons({
     createOrder: function(data, actions) {
         return actions.order.create({
@@ -80,30 +93,28 @@ paypal.Buttons({
     }
 }).render('#paypal-button-container-neuroedge-ai-ultimate');
 
-// Subscriptions - Enhanced with capture and error handling
-// Replace PLAN_IDs if invalid/expired
+
+// ------------------- Subscriptions -------------------
+// NOTE: Replace each PLAN_ID with your LIVE Plan ID
+// from your PayPal Dashboard (NOT Sandbox)
+
 paypal.Buttons({
     createSubscription: function(data, actions) {
         return actions.subscription.create({
-            plan_id: 'P-4H345618GE642320BNDHGWJA'  // Basic Plan ID - Verify in Dashboard
+            plan_id: 'P-4H345618GE642320BNDHGWJA'  // Basic $39/month
         });
     },
     onApprove: function(data, actions) {
-        return actions.subscription.capture().then(function(details) {
-            document.getElementById('result-message-sub-basic').innerText = 
-                'Subscription activated for Basic plan! ID: ' + data.subscriptionID;
-            console.log('Subscription details:', details);
-        }).catch(function(err) {
-            console.error('Subscription capture error:', err);
-            document.getElementById('result-message-sub-basic').innerText = 'Subscription failed. Please try again.';
-        });
+        document.getElementById('result-message-sub-basic').innerText = 
+            'Subscription activated for Basic plan! ID: ' + data.subscriptionID;
+        console.log('Subscription approved:', data);
     },
     onError: function(err) {
-        console.error('PayPal subscription error:', err);
+        console.error('PayPal subscription error (Basic):', err);
         document.getElementById('result-message-sub-basic').innerText = 'An error occurred. Check console.';
     },
     onCancel: function(data) {
-        console.log('Subscription canceled:', data);
+        console.log('Subscription canceled (Basic):', data);
         document.getElementById('result-message-sub-basic').innerText = 'Subscription canceled.';
     }
 }).render('#paypal-button-container-sub-basic');
@@ -111,25 +122,20 @@ paypal.Buttons({
 paypal.Buttons({
     createSubscription: function(data, actions) {
         return actions.subscription.create({
-            plan_id: 'P-3AB04862PL207104TNDHGUZA'  // Pro Plan ID - Verify in Dashboard
+            plan_id: 'P-3AB04862PL207104TNDHGUZA'  // Pro $79/month
         });
     },
     onApprove: function(data, actions) {
-        return actions.subscription.capture().then(function(details) {
-            document.getElementById('result-message-sub-pro').innerText = 
-                'Subscription activated for Pro plan! ID: ' + data.subscriptionID;
-            console.log('Subscription details:', details);
-        }).catch(function(err) {
-            console.error('Subscription capture error:', err);
-            document.getElementById('result-message-sub-pro').innerText = 'Subscription failed. Please try again.';
-        });
+        document.getElementById('result-message-sub-pro').innerText = 
+            'Subscription activated for Pro plan! ID: ' + data.subscriptionID;
+        console.log('Subscription approved:', data);
     },
     onError: function(err) {
-        console.error('PayPal subscription error:', err);
+        console.error('PayPal subscription error (Pro):', err);
         document.getElementById('result-message-sub-pro').innerText = 'An error occurred. Check console.';
     },
     onCancel: function(data) {
-        console.log('Subscription canceled:', data);
+        console.log('Subscription canceled (Pro):', data);
         document.getElementById('result-message-sub-pro').innerText = 'Subscription canceled.';
     }
 }).render('#paypal-button-container-sub-pro');
@@ -137,25 +143,20 @@ paypal.Buttons({
 paypal.Buttons({
     createSubscription: function(data, actions) {
         return actions.subscription.create({
-            plan_id: 'P-6N9864857H046771GNDHE7ZY'  // Ultimate Plan ID - Verify in Dashboard
+            plan_id: 'P-6N9864857H046771GNDHE7ZY'  // Ultimate $129/month
         });
     },
     onApprove: function(data, actions) {
-        return actions.subscription.capture().then(function(details) {
-            document.getElementById('result-message-sub-ultimate').innerText = 
-                'Subscription activated for Ultimate plan! ID: ' + data.subscriptionID;
-            console.log('Subscription details:', details);
-        }).catch(function(err) {
-            console.error('Subscription capture error:', err);
-            document.getElementById('result-message-sub-ultimate').innerText = 'Subscription failed. Please try again.';
-        });
+        document.getElementById('result-message-sub-ultimate').innerText = 
+            'Subscription activated for Ultimate plan! ID: ' + data.subscriptionID;
+        console.log('Subscription approved:', data);
     },
     onError: function(err) {
-        console.error('PayPal subscription error:', err);
+        console.error('PayPal subscription error (Ultimate):', err);
         document.getElementById('result-message-sub-ultimate').innerText = 'An error occurred. Check console.';
     },
     onCancel: function(data) {
-        console.log('Subscription canceled:', data);
+        console.log('Subscription canceled (Ultimate):', data);
         document.getElementById('result-message-sub-ultimate').innerText = 'Subscription canceled.';
     }
 }).render('#paypal-button-container-sub-ultimate');
