@@ -28,6 +28,7 @@ paypal.Buttons({
         return actions.order.capture().then(function(details) {
             document.getElementById('result-message-neuroedge-ai').innerText = 
                 'Transaction completed by ' + (details.payer.name.given_name || 'Customer') + '!';
+            alert('Payment successful! Check your email for the EA file.');
         }).catch(function(err) {
             console.error('Capture error:', err);
             document.getElementById('result-message-neuroedge-ai').innerText = 'Payment failed. Please try again.';
@@ -55,6 +56,7 @@ paypal.Buttons({
         return actions.order.capture().then(function(details) {
             document.getElementById('result-message-neuroedge-ai-pro').innerText = 
                 'Transaction completed by ' + (details.payer.name.given_name || 'Customer') + '!';
+            alert('Payment successful! Check your email for the EA file.');
         }).catch(function(err) {
             console.error('Capture error:', err);
             document.getElementById('result-message-neuroedge-ai-pro').innerText = 'Payment failed. Please try again.';
@@ -82,6 +84,7 @@ paypal.Buttons({
         return actions.order.capture().then(function(details) {
             document.getElementById('result-message-neuroedge-ai-ultimate').innerText = 
                 'Transaction completed by ' + (details.payer.name.given_name || 'Customer') + '!';
+            alert('Payment successful! Check your email for the EA file.');
         }).catch(function(err) {
             console.error('Capture error:', err);
             document.getElementById('result-message-neuroedge-ai-ultimate').innerText = 'Payment failed. Please try again.';
