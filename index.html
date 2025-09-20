@@ -175,6 +175,10 @@
         <strong>One-Time Purchase</strong>
         <div id="paypal-basic-onetime" class="paypal-button-container"></div>
         <strong>Monthly Subscription</strong>
+            paypal.Buttons({
+      createSubscription: (data, actions) => actions.subscription.create({ plan_id: "P-82E37085BW603832BNDHM2PQ" }),
+      onApprove: (data) => alert("Basic Subscription ID: " + data.subscriptionID)
+    }).render("#paypal-basic-sub");
         <div id="paypal-basic-sub" class="paypal-button-container"></div>
       </div>
     </div>
