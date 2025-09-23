@@ -315,6 +315,26 @@
     <p>&copy; 2025 NeuroEdge AI. All rights reserved. | <a href="mailto:neuroedgeultimate@gmail.com">Contact Us</a></p>
   </footer>
 
+ <script src="app.js" defer></script>
+   <script>
+    // Ensure PayPal SDK is loaded before executing app.js logic
+    function initPayPalButtons() {
+      if (typeof paypal === 'undefined') {
+        console.error('PayPal SDK not loaded. Check client ID and network.');
+        return;
+      }
+      console.log('PayPal SDK loaded.');
+      // app.js is already loaded via defer
+    }
+
+    if (window.paypal && window.paypal.Buttons) {
+      initPayPalButtons();
+    } else {
+      window.addEventListener('load', function() {
+        setTimeout(initPayPalButtons, 2000); // Wait up to 2 seconds
+      });
+    }
+ </script>
   <script>
     // One-time purchase buttons (using Hosted Buttons)
     paypal.HostedButtons({ hostedButtonId: "48TSPJZC8USMG" }).render("#paypal-basic-onetime");
@@ -344,6 +364,6 @@
       setTimeout(() => successMessage.style.display = 'none', 5000);
     });
   </script>
-  import { Analytics } from "@vercel/analytics/next"
 </body>
 </html>
+  import { Analytics } from "@vercel/analytics/next"
